@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { reactive } from 'vue';
+import { useThemeStore } from './stores/themeStore';
 // importar reactive
 // importart useThemeStore
 
@@ -6,7 +8,9 @@
 import { MoonIcon, SunIcon, LinkIcon } from '@heroicons/vue/24/solid'
 
 // instanciar useThemeStore
+const themeStore = useThemeStore()
 // crear variable reactiva con objeto useStore
+const reactiveTheme = reactive(themeStore)
 
 
 </script>
