@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
-import { useThemeStore } from '@/stores/themeStore'
-import { useTaskStore } from '@/stores/taskStore'
-
 // importar reactive
 // importar themeStore
 // importart taskStore
+import { reactive } from 'vue'
+import { useThemeStore } from '@/stores/themeStore'
+import { useTaskStore } from '@/stores/taskStore'
 
 //import type { TaskModel } from '@/models/TaskModel'
 // importamos el modelo Task
@@ -13,7 +12,6 @@ import { useTaskStore } from '@/stores/taskStore'
 // iconos
 import { TrashIcon } from '@heroicons/vue/24/outline'
 import { CheckCircleIcon as CompletedIcon } from '@heroicons/vue/24/solid'
-
 
 // definir variable para almacenar useThemeStore
 const themeStore = useThemeStore()
@@ -24,8 +22,6 @@ const reactiveTheme = reactive(themeStore)
 const taskStore = useTaskStore()
 // definir variable reactiva pasando objeto taskStore
 const reactiveTaskStore = reactive(taskStore)
-
-
 
 </script>
 
@@ -45,13 +41,13 @@ const reactiveTaskStore = reactive(taskStore)
                     <div class="absolute top-3 sm:top-4 left-5">
 
                     <!-- aca aplicar directiva @click para  cambiar estado de tarea -->
-                    <div @click="reactiveTaskStore.updateTaskStatus(task)" class="relative">
-                        <input
+                    <div class="relative">
+                        <input @click="reactiveTaskStore.updateTaskStatus(task)"
                         type="ckeckbox"
                         class="form-checkbox border rounded-full focus:ouline-none h-6 w-6 cursor-pointer transition ease-linear"
                         />
                         <!-- usar directiva v-if para mostrar si la tarjeta esta completada -->
-                        <CompletedIcon class="h-100 w-100 absolute left-0 top-0 text-green-600" v-if="task.status"/>
+                        <CompletedIcon class="h-100 w-100 absolute left-0 top-0 text-green-600" v-if="task.status" @click="reactiveTaskStore.updateTaskStatus(task)"/>
                     </div>
                 </div>
 
@@ -77,9 +73,9 @@ const reactiveTaskStore = reactive(taskStore)
 
         <!-- aca acciones de filtrado, usar @click segun corresponda -->
         <div class="px-6 py-2 mt-5">
-            <span class="inline-block bg-gray-300 rounded px-3 py-1 text-sm font-semibold mr-2 mb-2 hover:bg-gray-500 cursor-pointer shadow-lg">Todas</span>
-            <span class="inline-block bg-gray-300 rounded px-3 py-1 text-sm font-semibold mr-2 mb-2 hover:bg-gray-500 cursor-pointer shadow-lg">Completas</span>
-            <span class="inline-block bg-gray-300 rounded px-3 py-1 text-sm font-semibold mr-2 mb-2 hover:bg-gray-500 cursor-pointer shadow-lg">Pendientes</span>
+            <span @click="reactiveTaskStore.showAll()" class="inline-block bg-gray-300 rounded px-3 py-1 text-sm font-semibold mr-2 mb-2 hover:bg-gray-500 cursor-pointer shadow-lg">Todas</span>
+            <span @click="reactiveTaskStore.showCompleted()" class="inline-block bg-gray-300 rounded px-3 py-1 text-sm font-semibold mr-2 mb-2 hover:bg-gray-500 cursor-pointer shadow-lg">Completas</span>
+            <span @click="reactiveTaskStore.showPending()" class="inline-block bg-gray-300 rounded px-3 py-1 text-sm font-semibold mr-2 mb-2 hover:bg-gray-500 cursor-pointer shadow-lg">Pendientes</span>
 
         </div>
 

@@ -14,17 +14,18 @@ export const useTaskStore = defineStore({
   id: 'task',
   state: (): TaskState => ({
     loading: false,
-    data: [] as TaskModel[],
+    data: [],
   }),
   actions: {
     //**addTask**, agrega una nueva tarea a la lista en data usando el metodo de array push.
     addTask(task: TaskModel): void {
-      this.data.push(task);
-      task.id= 0;
-      task.status = false;
-      task.tarea = '';
+      const newTask = {...task}   //Clono la tarea, porque sino no la puedo guardar y modificarla despues
+      this.data.push(newTask);
+      task.id = this.data.length;   //Los id seran incrementales
+      task.status = false;   //Por defecto la tarea esta pendiente
+      task.tarea = '';   //Por defecto la tarea esta vacia
     },
-       //**removeTask**, recibe un tipo Task como argumento quita una nueva tarea de la lista en data usando el metodo filter
+    //**removeTask**, recibe un tipo Task como argumento quita una nueva tarea de la lista en data usando el metodo filter
     removeTask(task: TaskModel): void {
       this.data = this.data.filter((tarea) => tarea.id !== task.id);
     },
@@ -35,10 +36,11 @@ export const useTaskStore = defineStore({
       const index = this.data.findIndex((tarea) => tarea.id === task.id);
       if (index !== -1) {
         this.data[index].status = !this.data[index].status;
+        alert(this.data[index].status);
       }
     },
-     //**showCompleted**: actualiza data para mostrar solo tareas con status completo
-     showCompleted(): void {
+    //**showCompleted**: actualiza data para mostrar solo tareas con status completo
+    showCompleted(): void {
       this.data = this.data.filter((tarea) => tarea.status === true);
     },
     //**showPending**: actualiza data para mostrar solo tareas con status pendiente
@@ -49,8 +51,5 @@ export const useTaskStore = defineStore({
     showAll(): void {
       this.data = this.data;
     },
-    /*deleteTask(id: number): void {
-      this.tasks = this.tasks.filter((task) => task.id !== id);
-    },*/
   },
 });

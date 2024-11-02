@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
-import { useThemeStore } from './stores/themeStore';
 // importar reactive
 // importart useThemeStore
+import { reactive } from 'vue';
+import { useThemeStore } from './stores/themeStore';
 
 // iconos
 import { MoonIcon, SunIcon, LinkIcon } from '@heroicons/vue/24/solid'
@@ -12,7 +12,6 @@ const themeStore = useThemeStore()
 // crear variable reactiva con objeto useStore
 const reactiveTheme = reactive(themeStore)
 
-
 </script>
 
 <template>
@@ -21,13 +20,13 @@ const reactiveTheme = reactive(themeStore)
 - Luego utilizarlo en las directivas indicadas-->
 
   <!-- usar directiva v-bind:class para asignar clase class si isDark en el store es true -->
-  <div class="wrapper transition ease-linear" :class="reactiveTheme.isDark ? 'dark' : ''">
+  <div class="wrapper transition ease-linear" v-bind:class="reactiveTheme.isDark ? 'dark' : ''">
     <div class="btn-wrapper">
       <div class="toggle-btn flex items-center justify-center w-full my-4">
         <label for="toggle" class="flex items-center justify-center cursor-pointer">
           <div class="relative">
             <!-- usar directiva @click para ejecutar el metodo para cambiar de dark a light o viceversa -->
-            <input @click="reactiveTheme.toggleDarkMode" type="checkbox" id="toggle" class="sr-only"/>
+            <input @click="reactiveTheme.toggleDarkMode()" type="checkbox" id="toggle" class="sr-only"/>
             <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
             <div
               class="dot absolute left-1 top-1 bg-black w-6 h-6 flex items-center justify-center rounded-full transition">
@@ -38,12 +37,12 @@ const reactiveTheme = reactive(themeStore)
           </div>
 
           <!-- cambiar usar v-bind:class y atributo mode del ThemeState para cambiar el texto -->
-          <div class="label-text ml-2 font-medium" :class="reactiveTheme.isDark ? 'dark' : ''" v-text="reactiveTheme.isDark ? 'Modo Oscuro' : 'Modo Claro '">
-          </div>
+          <div class="label-text ml-2 font-medium" v-bind:class="reactiveTheme.isDark ? 'dark' : ''">
+          {{ reactiveTheme.mode }}</div>
         </label>
       </div>
     </div>
-    <!-- usar directiva v-bind:class para asinar clase class si isDark en el store es true -->
+    <!-- usar directiva v-bind:class para asignar clase class si isDark en el store es true -->
     <div class="img min-h-screen flex flex-col items-center transition" :class="reactiveTheme.isDark ? 'dark' : ''"></div>
     <div class="todo flex-1 lg:w-2/3 xl:w-2/5 w-full px-7">
       <RouterView />
