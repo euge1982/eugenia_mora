@@ -3,16 +3,16 @@
 ## Instrucciones
 
 ### MODELAJE
-- Crear modelo Task, que incluye un id (number), una tarea (string) y un status (boolean).
+- ##Crear modelo Task, que incluye un id (number), una tarea (string) y un status (boolean).
 
-- Crear un Modelo TaskState, que incluye un booleano loading, y una lista data de Task[]
+- ##Crear un Modelo TaskState, que incluye un booleano loading, y una lista data de Task[]
 
-- Crear un Modelo ThemeState que almacene los atributos isDark booleano y mode, que es un string que indica si el  tema es light o dark.
+- ##Crear un Modelo ThemeState que almacene los atributos isDark booleano y mode, que es un string que indica si el  tema es light o dark.
 
 ### ESTADO DE LA APLICACION
-- Crear dos store con pinia que incluya los modelos TaskState y ThemeState:
+- ##Crear dos store con pinia que incluya los modelos TaskState y ThemeState:
 
-* ThemeStore: debe contener una constante useThemeStore usando defineStore, que implemente el modelo ThemeState y un metodo para cambiar el tema. El estado inicial debe setearse en isDark: false, y  mode: 'Light Mode'. El metodo unicamente debe cambiar el isDark a !isDark y el string de mode a 'Dark / Light Mode' segun corresponda.
+* ##ThemeStore: debe contener una constante useThemeStore usando defineStore, que implemente el modelo ThemeState y un metodo para cambiar el tema. El estado inicial debe setearse en isDark: false, y  mode: 'Light Mode'. El metodo unicamente debe cambiar el isDark a !isDark y el string de mode a 'Dark / Light Mode' segun corresponda.
 
 * TaskStore debe contener una constante useTaskStore usando defineStore, que implemente el modelo TaskState. Definir el estado incial en loading false, data igual a una lista vacia. Se deberan crear los siguientes metodos:
 - **addTask**, agrega una nueva tarea a la lista en data usando el metodo de array push.
