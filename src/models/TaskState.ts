@@ -6,3 +6,9 @@ export interface TaskState {
   loading: boolean
   data: TaskModel[]
 }
+
+export interface TaskFilter extends TaskState {
+  completas: TaskModel[]
+  pendientes: TaskModel[]
+  todas: TaskModel[]
+}
